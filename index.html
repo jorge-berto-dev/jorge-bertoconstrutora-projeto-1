@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[NOME DA CONSTRUTORA] | Natureza e Sofisticação em São Paulo</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- AOS Library (Animate on Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Swiper CSS (para carrossel de depoimentos) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Nosso CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Transparente -->
+    <header class="header" id="header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="#hero">[CONSTRUTORA]</a>
+            </div>
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link">Início</a></li>
+                    <li><a href="#projetos" class="nav-link">Projetos</a></li>
+                    <li><a href="#sustentabilidade" class="nav-link">Sustentabilidade</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre Nós</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-cliente">
+                <a href="#" class="btn-cliente-header">
+                    <i class="fa-regular fa-building"></i> Área do Cliente
+                </a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section Fullscreen -->
+        <section id="hero" class="hero">
+            <div class="hero-overlay">
+                <div class="container hero-content" data-aos="fade-up">
+                    <div class="hero-selos">
+                        <span><i class="fa-regular fa-sun"></i> Sustentabilidade</span>
+                        <span><i class="fa-regular fa-leaf"></i> Design Premium</span>
+                    </div>
+                    <h1 class="hero-title">
+                        <span class="hero-title-light">Sua família merece um lar que une</span>
+                        <span class="hero-title-highlight">natureza e sofisticação</span>
+                    </h1>
+                    <p class="hero-text">Empreendimentos de alto padrão em São Paulo, desenvolvidos com tecnologia sustentável e assinados pelos melhores arquitetos. Viva o melhor da cidade sem abrir mão do verde.</p>
+                    <div class="hero-buttons">
+                        <a href="#projetos" class="btn btn-primary">Conheça os Projetos</a>
+                        <a href="#contato" class="btn btn-secondary">Fale com um Consultor</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Números da Construtora -->
+        <section id="numeros" class="numeros">
+            <div class="container">
+                <h2 class="section-title light" data-aos="fade-down">Nossa História em Números</h2>
+                <div class="numeros-grid">
+                    <div class="numero-card" data-aos="zoom-in" data-aos-delay="50">
+                        <h3 class="numero-valor" id="numeroProjetos" data-target="45">0</h3>
+                        <span class="numero-sinal">+</span>
+                        <p class="numero-texto">Projetos Entregues</p>
+                    </div>
+                    <div class="numero-card" data-aos="zoom-in" data-aos-delay="100">
+                        <h3 class="numero-valor" id="numeroFamilias" data-target="3200">0</h3>
+                        <span class="numero-sinal">+</span>
+                        <p class="numero-texto">Famílias Acolhidas</p>
+                    </div>
+                    <div class="numero-card" data-aos="zoom-in" data-aos-delay="150">
+                        <h3 class="numero-valor" id="numeroAnos" data-target="12">0</h3>
+                        <span class="numero-sinal"></span>
+                        <p class="numero-texto">Anos de Mercado</p>
+                    </div>
+                    <div class="numero-card" data-aos="zoom-in" data-aos-delay="200">
+                        <h3 class="numero-valor" id="numeroCertificacoes" data-target="100">0</h3>
+                        <span class="numero-sinal">%</span>
+                        <p class="numero-texto">Edificações com Certificação Verde</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Empreendimentos em Destaque -->
+        <section id="projetos" class="projetos">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-down">Onde o design encontra a natureza</h2>
+                
+                <div class="projetos-grid">
+                    <!-- Card 1 -->
+                    <div class="projeto-card" data-aos="fade-up" data-aos-delay="50">
+                        <div class="projeto-image">
+                            <img src="https://placehold.co/600x400/2C4A3E/F4F0E9?text=Reserva+Jardim+Europa" alt="Reserva Jardim Europa">
+                            <span class="projeto-badge">Lançamento</span>
+                        </div>
+                        <div class="projeto-info">
+                            <h3 class="projeto-titulo">Reserva Jardim Europa</h3>
+                            <p class="projeto-local"><i class="fa-regular fa-location-dot"></i> Vila Nova Conceição</p>
+                            <div class="projeto-detalhes">
+                                <span><i class="fa-regular fa-bed"></i> 3 e 4 suítes</span>
+                                <span><i class="fa-regular fa-leaf"></i> 2.000m² área verde</span>
+                            </div>
+                            <a href="#" class="projeto-link">Conheça o Projeto <i class="fa-regular fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="projeto-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="projeto-image">
+                            <img src="https://placehold.co/600x400/B87333/F4F0E9?text=Green+Life+Morumbi" alt="Green Life Morumbi">
+                            <span class="projeto-badge">Em construção</span>
+                        </div>
+                        <div class="projeto-info">
+                            <h3 class="projeto-titulo">Green Life Morumbi</h3>
+                            <p class="projeto-local"><i class="fa-regular fa-location-dot"></i> Morumbi</p>
+                            <div class="projeto-detalhes">
+                                <span><i class="fa-regular fa-bed"></i> 4 suítes</span>
+                                <span><i class="fa-regular fa-leaf"></i> 3.500m² área verde</span>
+                            </div>
+                            <a href="#" class="projeto-link">Conheça o Projeto <i class="fa-regular fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <div class="projeto-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="projeto-image">
+                            <img src="https://placehold.co/600x400/2B2B2B/F4F0E9?text=Alphaville+Residence" alt="Alphaville Residence">
+                            <span class="projeto-badge">Lançamento</span>
+                        </div>
+                        <div class="projeto-info">
+                            <h3 class="projeto-titulo">Alphaville Residence</h3>
+                            <p class="projeto-local"><i class="fa-regular fa-location-dot"></i> Alphaville</p>
+                            <div class="projeto-detalhes">
+                                <span><i class="fa-regular fa-bed"></i> 5 suítes</span>
+                                <span><i class="fa-regular fa-leaf"></i> 5.000m² área verde</span>
+                            </div>
+                            <a href="#" class="projeto-link">Conheça o Projeto <i class="fa-regular fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diferencial Sustentável -->
+        <section id="sustentabilidade" class="sustentabilidade">
+            <div class="container sustentabilidade-grid">
+                <div class="sustentabilidade-image" data-aos="fade-right">
+                    <img src="https://placehold.co/800x1000/2C4A3E/F4F0E9?text=Paineis+Solares+e+Jardim+Vertical" alt="Painéis solares e jardim vertical">
+                </div>
+                <div class="sustentabilidade-content" data-aos="fade-left">
+                    <h4 class="section-subtitle">Construção Sustentável</h4>
+                    <h2 class="section-title left-align">Uma construção que <span class="highlight">respeita o amanhã.</span></h2>
+                    <p class="sustentabilidade-text">Na <strong>[NOME DA CONSTRUTORA]</strong>, a sustentabilidade não é um diferencial, é a base. Todos os nossos projetos seguem rigorosos padrões de eficiência energética, gestão de resíduos e uso de materiais de baixo impacto ambiental. Isso significa contas de luz mais baixas e um planeta mais saudável para seus filhos.</p>
+                    
+                    <ul class="sustentabilidade-lista">
+                        <li><i class="fa-regular fa-solar-panel"></i> <strong>Energia solar fotovoltaica</strong></li>
+                        <li><i class="fa-regular fa-water"></i> <strong>Sistema de reuso de água da chuva</strong></li>
+                        <li><i class="fa-regular fa-tree"></i> <strong>Preservação de áreas verdes nativas</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Premium -->
+        <section id="design" class="design">
+            <div class="container design-grid">
+                <div class="design-content" data-aos="fade-right">
+                    <h4 class="section-subtitle">Design Autoral</h4>
+                    <h2 class="section-title left-align">Acabamentos que <span class="highlight">contam uma história.</span></h2>
+                    <p class="design-text">Cada detalhe é pensado por arquitetos renomados para oferecer funcionalidade e beleza. Dos porcelanatos importados às bancadas de quartzito, seus espaços são verdadeiras galerias de arte viva, projetadas para receber quem você ama.</p>
+                    
+                    <ul class="design-lista">
+                        <li><i class="fa-regular fa-gem"></i> <strong>Mármores Italianos</strong></li>
+                        <li><i class="fa-regular fa-pencil"></i> <strong>Marcenaria Sob Medida</strong></li>
+                        <li><i class="fa-regular fa-microchip"></i> <strong>Automação Residencial</strong></li>
+                    </ul>
+                </div>
+                <div class="design-image" data-aos="fade-left">
+                    <img src="https://placehold.co/800x1000/B87333/F4F0E9?text=Acabamentos+de+Luxo" alt="Detalhes de acabamentos de luxo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos (Carrossel) -->
+        <section id="depoimentos" class="depoimentos">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-down">A voz de quem já vive esse sonho</h2>
+                
+                <div class="swiper depoimentos-swiper" data-aos="fade-up">
+                    <div class="swiper-wrapper">
+                        <!-- Depoimento 1 -->
+                        <div class="swiper-slide">
+                            <div class="depoimento-card">
+                                <div class="depoimento-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="depoimento-texto">"Comprar um apartamento da [NOME DA CONSTRUTORA] foi a melhor decisão da nossa família. Além da qualidade construtiva ser impecável, saber que nosso lar foi construído com respeito ao meio ambiente nos enche de orgulho. Recomendo de olhos fechados."</p>
+                                <p class="depoimento-autor">Ana Paula Rodrigues</p>
+                                <p class="depoimento-empreendimento">Residencial Green Life</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Depoimento 2 -->
+                        <div class="swiper-slide">
+                            <div class="depoimento-card">
+                                <div class="depoimento-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="depoimento-texto">"O acabamento é simplesmente espetacular. Cada detalhe foi pensado com muito carinho e sofisticação. A equipe da construtora foi extremamente profissional e atenciosa durante todo o processo de compra e entrega das chaves."</p>
+                                <p class="depoimento-autor">Carlos Eduardo Mendes</p>
+                                <p class="depoimento-empreendimento">Reserva Jardim Europa</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Depoimento 3 -->
+                        <div class="swiper-slide">
+                            <div class="depoimento-card">
+                                <div class="depoimento-rating">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="depoimento-texto">"A preocupação com a sustentabilidade foi o que mais nos chamou atenção. Hoje economizamos muito na conta de luz graças aos painéis solares. E o melhor: tudo isso sem abrir mão do conforto e da elegância."</p>
+                                <p class="depoimento-autor">Patrícia Albuquerque</p>
+                                <p class="depoimento-empreendimento">Green Life Morumbi</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Setas de navegação -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    
+                    <!-- Paginação (dots) -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer / Contato -->
+    <footer id="contato" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Coluna Esquerda: Contato -->
+                <div class="footer-col" data-aos="fade-up">
+                    <h3>Venha construir o futuro com a gente.</h3>
+                    <p><i class="fa-regular fa-location-dot"></i> Av. Brigadeiro Faria Lima, 3500 - 10º andar, Itaim Bibi - SP</p>
+                    <p><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20informações%20sobre%20os%20empreendimentos." target="_blank">(11) 99999-9999</a></p>
+                    
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    
+                    <div class="footer-selos">
+                        <span class="selo">LEED</span>
+                        <span class="selo">ISO 9001</span>
+                    </div>
+                </div>
+                
+                <!-- Coluna Direita: Formulário de Contato -->
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Fale com um consultor</h3>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="contactNome" name="nome" placeholder="Seu nome" required>
+                            <span class="error-message" id="errorNome"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="contactEmail" name="email" placeholder="Seu e-mail" required>
+                            <span class="error-message" id="errorEmail"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="contactTelefone" name="telefone" placeholder="Seu WhatsApp" required>
+                            <span class="error-message" id="errorTelefone"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="contactMensagem" name="mensagem" rows="3" placeholder="Sua mensagem (opcional)"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-footer">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mapa -->
+        <div class="footer-mapa">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197476928374!2d-46.6573411!3d-23.5613541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8d0b8d1c5%3A0x8f2b0a2f5a5f5b0!2sJardins%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2024 [NOME DA CONSTRUTORA]. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
