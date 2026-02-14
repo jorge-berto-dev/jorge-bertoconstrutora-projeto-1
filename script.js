@@ -1,233 +1,500 @@
-// ===== INICIALIZAÇÃO DO AOS =====
-AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 100
+// ========================================
+// INITIALIZATION
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    initAOS();
+    initHeader();
+    initMobileMenu();
+    initSmoothScroll();
+    initCounterAnimation();
+    initTestimonialSlider();
+    initContactForm();
 });
 
-// ===== HEADER TRANSPARENTE PARA SÓLIDO =====
-const header = document.getElementById('header');
+// ========================================
+// AOS ANIMATION
+// ========================================
 
-function updateHeader() {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-        header.classList.remove('transparent');
-    } else {
-        header.classList.add('transparent');
-        header.classList.remove('scrolled');
-    }
+function initAOS() {
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        easing: 'ease-out-cubic'
+    });
 }
 
-// Estado inicial
-updateHeader();
+// ========================================
+// HEADER SCROLL BEHAVIOR
+// ========================================
 
-// Monitorar scroll
-window.addEventListener('scroll', updateHeader);
-
-// ===== MENU MOBILE =====
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const navMenu = document.getElementById('navMenu');
-const menuIcon = document.getElementById('menuIcon');
-
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        
-        // Troca o ícone entre 'bars' e 'times'
-        if (navMenu.classList.contains('active')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
+function initHeader() {
+    const header = document.getElementById('header');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
         } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
+            header.classList.remove('scrolled');
         }
     });
 }
 
-// Fecha o menu mobile ao clicar em um link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 1023) {
-            navMenu.classList.remove('active');
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-        }
-    });
-});
+// ========================================
+// MOBILE MENU
+// ========================================
 
-// ===== CONTADOR ANIMADO (NÚMEROS) =====
-function animateNumbers() {
-    const numerosSection = document.getElementById('numeros');
-    if (!numerosSection) return;
+function initMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const overlay = document.querySelector('.mobile-menu-overlay');
     
-    // Se já foi animado, não animar de novo
-    if (numerosSection.dataset.animated === 'true') return;
+    // Open mobile menu
+    hamburger.addEventListener('click', function() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
     
-    const elementos = [
-        { element: document.getElementById('numeroProjetos'), target: 45 },
-        { element: document.getElementById('numeroFamilias'), target: 3200 },
-        { element: document.getElementById('numeroAnos'), target: 12 },
-        { element: document.getElementById('numeroCertificacoes'), target: 100 }
-    ];
+    // Close mobile menu
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
     
-    const duration = 2000; // 2 segundos
-    const interval = 20; // Atualiza a cada 20ms
-    const steps = duration / interval;
+    closeMenu.addEventListener('click', closeMobileMenu);
+    overlay.addEventListener('click', closeMobileMenu);
     
-    // Valores iniciais
-    let currentValues = elementos.map(() => 0);
-    
-    // Incrementos por passo
-    const increments = elementos.map(item => item.target / steps);
-    
-    const counter = setInterval(() => {
-        let finished = true;
-        
-        elementos.forEach((item, index) => {
-            if (currentValues[index] < item.target) {
-                currentValues[index] += increments[index];
-                item.element.textContent = Math.min(Math.floor(currentValues[index]), item.target);
-                finished = false;
-            } else {
-                item.element.textContent = item.target;
-            }
+    // Close menu when clicking on a link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            closeMobileMenu();
         });
-        
-        if (finished) {
-            clearInterval(counter);
-            numerosSection.dataset.animated = 'true';
-        }
-    }, interval);
-}
-
-// ===== INTERSECTION OBSERVER PARA CONTADOR =====
-const numerosObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateNumbers();
-            numerosObserver.unobserve(entry.target);
-        }
     });
-}, { threshold: 0.5 });
-
-const numerosSection = document.getElementById('numeros');
-if (numerosSection) {
-    numerosObserver.observe(numerosSection);
 }
 
-// ===== INICIALIZAÇÃO DO SWIPER (CARROSSEL) =====
-const swiper = new Swiper('.depoimentos-swiper', {
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-});
+// ========================================
+// SMOOTH SCROLL
+// ========================================
 
-// ===== SCROLL SUAVE =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        
-        if (href !== '#' && href !== '') {
-            const targetElement = document.querySelector(href);
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
             
-            if (targetElement) {
+            // Skip empty anchors
+            if (href === '#' || href === '#!') {
+                e.preventDefault();
+                return;
+            }
+            
+            const target = document.querySelector(href);
+            
+            if (target) {
                 e.preventDefault();
                 
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight;
+                const headerHeight = document.getElementById('header').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                 
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
             }
+        });
+    });
+}
+
+// ========================================
+// COUNTER ANIMATION
+// ========================================
+
+function initCounterAnimation() {
+    const counters = document.querySelectorAll('.numero');
+    let hasAnimated = false;
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                counters.forEach(counter => {
+                    animateCounter(counter);
+                });
+            }
+        });
+    }, observerOptions);
+    
+    const numerosSection = document.querySelector('.numeros');
+    if (numerosSection) {
+        observer.observe(numerosSection);
+    }
+}
+
+function animateCounter(counter) {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const increment = target / (duration / 16); // 60 FPS
+    let current = 0;
+    
+    const updateCounter = () => {
+        current += increment;
+        
+        if (current < target) {
+            counter.textContent = Math.floor(current);
+            requestAnimationFrame(updateCounter);
+        } else {
+            counter.textContent = target;
+        }
+    };
+    
+    updateCounter();
+}
+
+// ========================================
+// TESTIMONIAL SLIDER (SWIPER)
+// ========================================
+
+function initTestimonialSlider() {
+    const swiper = new Swiper('.depoimentos-slider', {
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        speed: 800,
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
         }
     });
-});
+}
 
-// ===== VALIDAÇÃO DO FORMULÁRIO DE CONTATO =====
-const contactForm = document.getElementById('contactForm');
+// ========================================
+// CONTACT FORM VALIDATION
+// ========================================
 
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    const modal = document.getElementById('successModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const nome = document.getElementById('contactNome');
-        const email = document.getElementById('contactEmail');
-        const telefone = document.getElementById('contactTelefone');
+        // Clear previous errors
+        clearErrors();
         
-        const errorNome = document.getElementById('errorNome');
-        const errorEmail = document.getElementById('errorEmail');
-        const errorTelefone = document.getElementById('errorTelefone');
+        // Get form values
+        const nome = document.getElementById('nome').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const telefone = document.getElementById('telefone').value.trim();
         
         let isValid = true;
         
-        // Validação do Nome
-        if (nome.value.trim() === '') {
-            nome.classList.add('error');
-            errorNome.textContent = 'Campo obrigatório';
+        // Validate nome
+        if (nome === '') {
+            showError('nomeError', 'Por favor, preencha seu nome.');
             isValid = false;
-        } else {
-            nome.classList.remove('error');
-            errorNome.textContent = '';
         }
         
-        // Validação do Email
-        const emailValue = email.value.trim();
-        if (emailValue === '') {
-            email.classList.add('error');
-            errorEmail.textContent = 'Campo obrigatório';
+        // Validate email
+        if (email === '') {
+            showError('emailError', 'Por favor, preencha seu e-mail.');
             isValid = false;
-        } else if (!emailValue.includes('@') || !emailValue.includes('.')) {
-            email.classList.add('error');
-            errorEmail.textContent = 'E-mail inválido';
+        } else if (!isValidEmail(email)) {
+            showError('emailError', 'Por favor, insira um e-mail válido.');
             isValid = false;
-        } else {
-            email.classList.remove('error');
-            errorEmail.textContent = '';
         }
         
-        // Validação do Telefone
-        if (telefone.value.trim() === '') {
-            telefone.classList.add('error');
-            errorTelefone.textContent = 'Campo obrigatório';
+        // Validate telefone
+        if (telefone === '') {
+            showError('telefoneError', 'Por favor, preencha seu telefone.');
             isValid = false;
-        } else {
-            telefone.classList.remove('error');
-            errorTelefone.textContent = '';
         }
         
+        // If form is valid, show success message
         if (isValid) {
-            alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
-            contactForm.reset();
+            showSuccessModal();
+            form.reset();
+        }
+    });
+    
+    // Close modal
+    closeModalBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
         }
     });
 }
 
-// ===== AJUSTE INICIAL PARA ÂNCORAS NA URL =====
-window.addEventListener('load', () => {
-    if (window.location.hash) {
-        const target = document.querySelector(window.location.hash);
-        if (target) {
-            setTimeout(() => {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }, 200);
-        }
+function showError(elementId, message) {
+    const errorElement = document.getElementById(elementId);
+    errorElement.textContent = message;
+}
+
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.error-message');
+    errorElements.forEach(element => {
+        element.textContent = '';
+    });
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showSuccessModal() {
+    const modal = document.getElementById('successModal');
+    modal.classList.add('active');
+}
+
+// ========================================
+// CARD HOVER EFFECTS (Additional Enhancement)
+// ========================================
+
+const cards = document.querySelectorAll('.empreendimento-card');
+
+cards.forEach(card => {
+    const cardImage = card.querySelector('.card-image');
+    
+    card.addEventListener('mouseenter', function() {
+        cardImage.style.transform = 'scale(1.05)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        cardImage.style.transform = 'scale(1)';
+    });
+});
+
+// ========================================
+// PARALLAX EFFECT ON HERO (Optional Enhancement)
+// ========================================
+
+window.addEventListener('scroll', function() {
+    const hero = document.querySelector('.hero');
+    const scrollPosition = window.pageYOffset;
+    
+    if (hero && scrollPosition < window.innerHeight) {
+        hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
     }
 });
+
+// ========================================
+// SCROLL REVEAL ENHANCEMENTS
+// ========================================
+
+// Add staggered animation to grid items
+const gridItems = document.querySelectorAll('.empreendimentos-grid .empreendimento-card');
+gridItems.forEach((item, index) => {
+    item.setAttribute('data-aos-delay', (index + 1) * 100);
+});
+
+// ========================================
+// ACTIVE NAVIGATION LINK
+// ========================================
+
+window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (window.pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// ========================================
+// LOADING ANIMATION (Optional)
+// ========================================
+
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+    
+    // Add fade-in effect to hero content
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.opacity = '0';
+        setTimeout(() => {
+            heroContent.style.transition = 'opacity 1s ease';
+            heroContent.style.opacity = '1';
+        }, 100);
+    }
+});
+
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
+
+// Debounce function for scroll events
+function debounce(func, wait = 20, immediate = true) {
+    let timeout;
+    return function() {
+        const context = this;
+        const args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+// Throttle function for performance optimization
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Apply throttle to scroll events
+const throttledScroll = throttle(function() {
+    // Add any additional scroll-based animations here
+}, 100);
+
+window.addEventListener('scroll', throttledScroll);
+
+// ========================================
+// PREVENT SCROLL WHEN MOBILE MENU IS OPEN
+// ========================================
+
+const mobileMenu = document.getElementById('mobileMenu');
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+    });
+});
+
+observer.observe(mobileMenu, {
+    attributes: true
+});
+
+// ========================================
+// ACCESSIBILITY IMPROVEMENTS
+// ========================================
+
+// Add keyboard navigation for modal
+document.addEventListener('keydown', function(e) {
+    const modal = document.getElementById('successModal');
+    
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+    }
+});
+
+// Focus management for mobile menu
+const hamburger = document.getElementById('hamburger');
+const closeMenu = document.getElementById('closeMenu');
+
+hamburger.addEventListener('click', function() {
+    setTimeout(() => {
+        closeMenu.focus();
+    }, 300);
+});
+
+// ========================================
+// PERFORMANCE OPTIMIZATION
+// ========================================
+
+// Lazy load images (if needed)
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+    
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    lazyImages.forEach(img => imageObserver.observe(img));
+}
+
+// ========================================
+// ANALYTICS TRACKING (Placeholder)
+// ========================================
+
+// Track CTA button clicks
+const ctaButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+ctaButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const buttonText = this.textContent.trim();
+        console.log(`CTA Clicked: ${buttonText}`);
+        // Add your analytics tracking code here
+        // Example: gtag('event', 'click', { 'event_category': 'CTA', 'event_label': buttonText });
+    });
+});
+
+// Track project card clicks
+const projectCards = document.querySelectorAll('.card-link');
+projectCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+        const projectName = this.closest('.empreendimento-card').querySelector('.card-title').textContent;
+        console.log(`Project Clicked: ${projectName}`);
+        // Add your analytics tracking code here
+    });
+});
+
+// ========================================
+// CONSOLE WELCOME MESSAGE
+// ========================================
+
+console.log('%c[NOME DA CONSTRUTORA]', 'color: #2C4A3E; font-size: 24px; font-weight: bold;');
+console.log('%cSite desenvolvido com sustentabilidade e design premium em mente.', 'color: #B87333; font-size: 14px;');
+console.log('%cInteressado em trabalhar conosco? Entre em contato!', 'color: #2B2B2B; font-size: 12px;');
